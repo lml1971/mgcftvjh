@@ -4,6 +4,20 @@
 
 ---
 
+<p align="center">
+  <img src="docs/assets/banner.png" alt="banner" width="100%" />
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/runtime-Cloudflare%20Workers-F38020?style=for-the-badge&logo=cloudflare" alt="runtime" />
+  <img src="https://img.shields.io/badge/edge-serverless-000000?style=for-the-badge" alt="edge" />
+  <img src="https://img.shields.io/badge/storage-KV%20Cache-FF9900?style=for-the-badge" alt="kv" />
+  <img src="https://img.shields.io/badge/output-M3U%20%7C%20TXT%20%7C%20JSON-blueviolet?style=for-the-badge" alt="output" />
+  <img src="https://img.shields.io/badge/license-MIT-green?style=for-the-badge" alt="license" />
+</p>
+
+---
+
 ## 📁 文件结构
 
 | 文件 | 说明 |
@@ -16,19 +30,36 @@
 
 ## 🚀 功能特性
 
-- **多源聚合**：从多个远程地址抓取直播源（支持 `.m3u` / `.txt` 格式，也可自动判断）
-- **KV 缓存**：接入 Cloudflare KV，缓存 10 分钟，避免每次请求冷启动重新抓取
-- **自动分组**：基于频道标题关键词，自动归入「央视 / 卫视 / 体育 / 影视」等分类
-- **引流注入**：在频道列表顶部固定插入自定义推广节目（PROMO_LIST）
-- **垃圾过滤**：通过关键词黑名单过滤广告/无效频道
-- **多格式输出**：
-  - `GET /` → 首页 JSON（分类 + 频道列表）
-  - `GET /?ac=list&t=分组名&pg=1` → 分类分页列表
-  - `GET /?ac=detail&ids=ch_0,ch_1` → 频道详情
-  - `GET /m3u` 或 `/live.m3u` → M3U 播放列表
-  - `GET /txt` 或 `/live.txt` → TXT 频道列表
-- **CORS 支持**：全开放跨域头，可直接被前端/播放器调用
-- **环境变量覆盖**：生产环境可通过 Dashboard 设置 `SOURCE_URLS`、`ENABLE_PROMO` 等变量动态覆盖硬编码配置
+| 特性 | 说明 |
+|------|------|
+| 🔀 **多源聚合** | 从多个远程地址抓取直播源（支持 `.m3u` / `.txt`，也可自动判断格式） |
+| ⚡ **KV 缓存** | 接入 Cloudflare KV，缓存 10 分钟，避免冷启动重复抓取 |
+| 🗂️ **自动分组** | 基于标题关键词自动归入「央视 / 卫视 / 体育 / 影视」等分类 |
+| 📢 **引流注入** | 在频道列表顶部固定插入自定义推广节目（`PROMO_LIST`） |
+| 🧹 **垃圾过滤** | 关键词黑名单过滤广告 / 无效频道 |
+| 📦 **多格式输出** | M3U / TXT / JSON，兼容各类 IPTV 播放器 |
+| 🌐 **CORS 支持** | 全开放跨域头，可直接被前端 / 播放器调用 |
+| 🔧 **环境变量覆盖** | Dashboard 设置 `SOURCE_URLS`、`ENABLE_PROMO` 等动态覆盖硬编码 |
+
+### 路由一览
+
+| 路径 | 说明 |
+|------|------|
+| `GET /` | 首页 JSON（分类 + 频道列表） |
+| `GET /?ac=list&t=分组名&pg=1` | 分类分页列表 |
+| `GET /?ac=detail&ids=ch_0,ch_1` | 频道详情 |
+| `GET /m3u` 或 `/live.m3u` | M3U 播放列表 |
+| `GET /txt` 或 `/live.txt` | TXT 频道列表 |
+
+---
+
+## ✨ 效果预览
+
+<p align="center">
+  <img src="docs/assets/outputs.png" alt="output formats" width="80%" />
+</p>
+
+> 左：M3U 播放列表（VLC / IPTV 播放器直接打开）｜ 中：TXT 频道列表 ｜ 右：首页 JSON API
 
 ---
 
@@ -107,38 +138,29 @@ wrangler deploy
 
 ### Dashboard 部署
 
-1. 进入 Cloudflare Dashboard → Workers & Pages → Create Worker
+1. 进入 Cloudflare Dashboard → **Workers & Pages → Create Worker**
 2. 粘贴 `worker.js` 代码
-3. 在 Settings → Bindings 中添加一个 KV Namespace，变量名填 `KV`
-4. Save & Deploy
+3. 在 **Settings → Bindings** 中添加一个 KV Namespace，变量名填 `KV`
+4. **Save & Deploy**
 
 ---
 
 ## 📡 API 使用示例
 
-### 首页（分类 + 频道列表）
 ```bash
+# 首页（分类 + 频道列表）
 curl https://your-worker.workers.dev/
-```
 
-### 获取 M3U 播放列表
-```bash
+# 获取 M3U 播放列表（可直接在 VLC / IPTV 播放器中打开）
 curl https://your-worker.workers.dev/m3u
-```
-可直接在 VLC / IPTV 播放器中打开。
 
-### 获取 TXT 格式
-```bash
+# 获取 TXT 格式
 curl https://your-worker.workers.dev/txt
-```
 
-### 分页获取某分类频道
-```bash
+# 分页获取某分类频道
 curl "https://your-worker.workers.dev/?ac=list&t=📺%20央视&pg=1&limit=20"
-```
 
-### 获取频道详情
-```bash
+# 获取频道详情
 curl "https://your-worker.workers.dev/?ac=detail&ids=ch_0,ch_5"
 ```
 
@@ -164,13 +186,17 @@ loadAllChannels()
    ├── 3. regroupChannels() 自动分组
    │
    └── 4. waitUntil() 异步写回 KV（不阻塞响应）
-   │
-   ▼
-路由分发（/m3u、/txt、/?ac=list、/?ac=detail、/）
-   │
-   ▼
-Response
+        │
+        ▼
+   路由分发（/m3u、/txt、/?ac=list、/?ac=detail、/）
+        │
+        ▼
+     Response
 ```
+
+<p align="center">
+  <img src="docs/assets/arch.png" alt="architecture" width="70%" />
+</p>
 
 ---
 
@@ -194,6 +220,25 @@ Response
 3. **超时限制**：单次 Worker 执行上限 30 秒（CPU），抓取超时设为 15 秒，避免雪崩
 4. **直播源稳定性**：上游源失效时会在日志中输出错误，不影响其他源的返回
 5. **引流合规**：PROMO_LIST 中的内容请确保版权合规
+
+---
+
+## 👤 关于作者
+
+<p align="center">
+  <img src="docs/assets/author.png" alt="author" width="160" style="border-radius:12px;" />
+</p>
+
+<p align="center">
+  <b>一个自称「伪码农」的中年男人 🧓👨‍💻</b><br/>
+  <sub>正经西装领带，不正经的只有代码。</sub>
+</p>
+
+> 💡 **作者自述**：本职工作跟代码没半点关系，纯属闲着也是闲着，拿 Cloudflare Workers 练练手。
+> 这个直播源聚合服务，就是一边查文档一边跟 AI 结对编程"磕"出来的——能跑就算成功，跑崩了就刷新重试。
+> 代码写得不优雅，但好在**能用、好部署、改配置就能跑**，适合同样想折腾又不想深陷 Node 生态的同学。
+
+如果这个项目对你有帮助，欢迎 ⭐ Star / Fork，也欢迎提 Issue（作者承诺尽量看、不一定改 😂）。
 
 ---
 
