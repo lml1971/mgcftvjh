@@ -63,6 +63,39 @@
 
 ---
 
+## 👤 关于作者
+
+<p align="center">
+  <table align="center" style="border-collapse:separate;border-spacing:0;overflow:hidden;">
+    <tr>
+      <td align="center" width="200" valign="middle"
+          style="background:linear-gradient(135deg,#1f2937,#374151);padding:28px 20px;border-radius:16px 0 0 16px;">
+        <img src="docs/assets/author.png" alt="author" width="140" height="140"
+             style="border-radius:50%;border:3px solid #F38020;box-shadow:0 4px 14px rgba(0,0,0,.35);object-fit:cover;" />
+      </td>
+      <td align="left" valign="middle"
+          style="background:#f8fafc;padding:24px 28px;border-radius:0 16px 16px 0;">
+        <div style="font-size:18px;font-weight:700;color:#111827;">
+          一个自称「伪码农」的中年男人 🧓👨‍💻
+        </div>
+        <div style="font-size:13px;color:#6b7280;margin-top:4px;">
+          正经西装领带，不正经的只有代码。
+        </div>
+        <div style="margin-top:12px;font-size:13.5px;line-height:1.7;color:#374151;">
+          💡 <strong>作者自述</strong>：本职工作跟代码没半点关系，纯属闲着也是闲着，拿 Cloudflare Workers 练练手。<br/>
+          这个直播源聚合服务，就是一边查文档一边跟 AI 结对编程"磕"出来的——能跑就算成功，跑崩了就刷新重试。<br/>
+          代码写得不优雅，但好在 <strong>能用、好部署、改配置就能跑</strong>，适合同样想折腾又不想深陷 Node 生态的同学。
+        </div>
+        <div style="margin-top:12px;font-size:13px;color:#4b5563;">
+          如果这个项目对你有帮助，欢迎 ⭐ Star / Fork，也欢迎提 Issue（作者承诺尽量看、不一定改 😂）。
+        </div>
+      </td>
+    </tr>
+  </table>
+</p>
+
+---
+
 ## 📝 配置说明
 
 ### 用户配置区（仅需修改此部分）
@@ -220,25 +253,6 @@ loadAllChannels()
 3. **超时限制**：单次 Worker 执行上限 30 秒（CPU），抓取超时设为 15 秒，避免雪崩
 4. **直播源稳定性**：上游源失效时会在日志中输出错误，不影响其他源的返回
 5. **引流合规**：PROMO_LIST 中的内容请确保版权合规
-
----
-
-## 👤 关于作者
-
-<p align="center">
-  <img src="docs/assets/author.png" alt="author" width="160" style="border-radius:12px;" />
-</p>
-
-<p align="center">
-  <b>一个自称「伪码农」的中年男人 🧓👨‍💻</b><br/>
-  <sub>正经西装领带，不正经的只有代码。</sub>
-</p>
-
-> 💡 **作者自述**：本职工作跟代码没半点关系，纯属闲着也是闲着，拿 Cloudflare Workers 练练手。
-> 这个直播源聚合服务，就是一边查文档一边跟 AI 结对编程"磕"出来的——能跑就算成功，跑崩了就刷新重试。
-> 代码写得不优雅，但好在**能用、好部署、改配置就能跑**，适合同样想折腾又不想深陷 Node 生态的同学。
-
-如果这个项目对你有帮助，欢迎 ⭐ Star / Fork，也欢迎提 Issue（作者承诺尽量看、不一定改 😂）。
 
 ---
 
