@@ -18,6 +18,41 @@
 
 ---
 
+## 👤 关于作者
+
+<p align="center">
+  <table align="center" style="border-collapse:separate;border-spacing:0;overflow:hidden;">
+    <tr>
+      <td align="center" width="200" valign="middle"
+          style="background:linear-gradient(135deg,#1f2937,#374151);padding:28px 20px;border-radius:16px 0 0 16px;">
+        <img src="docs/assets/author.png" alt="author" width="140" height="140"
+             style="border-radius:50%;border:3px solid #F38020;box-shadow:0 4px 14px rgba(0,0,0,.35);object-fit:cover;" />
+      </td>
+      <td align="left" valign="middle"
+          style="background:#f8fafc;padding:24px 28px;border-radius:0 16px 16px 0;">
+        <div style="font-size:18px;font-weight:700;color:#111827;">
+          一个不识码的中年男人 🧓👨‍💻
+        </div>
+        <div style="font-size:13px;color:#6b7280;margin-top:4px;">
+          正经西装领带，不正经的只有思路。
+        </div>
+        <div style="margin-top:12px;font-size:13.5px;line-height:1.7;color:#374151;">
+          💡 <strong>作者自述</strong>：本职工作跟代码没半点关系，纯属闲着也是闲着，拿 Cloudflare Workers 实现TV直播源自由。<br/>
+          这个直播源聚合服务，就是一边想一边跟AI结对编程"磕"出来的——能跑就算成功，跑崩了就刷新重试。<br/>
+          直播源不是最优，但好在 <strong>能用、好部署、改配置就能跑</strong>，适合同样想折腾又不想深陷 Node 生态的同学。
+        </div>
+        <div style="margin-top:12px;font-size:13px;color:#4b5563;">
+          如果这个项目对你有帮助，欢迎 ⭐ Star / Fork，也欢迎提 Issue（作者承诺尽量看、不一定改 😂）。
+        </div>
+      </td>
+    </tr>
+  </table>
+</p>
+
+> 📸 **作者照片**：证件照一张（稍后放入 `docs/assets/author.png` 即可，已在此处预留位置）。
+
+---
+
 ## 📁 文件结构
 
 | 文件 | 说明 |
@@ -60,39 +95,6 @@
 </p>
 
 > 左：M3U 播放列表（VLC / IPTV 播放器直接打开）｜ 中：TXT 频道列表 ｜ 右：首页 JSON API
-
----
-
-## 👤 关于作者
-
-<p align="center">
-  <table align="center" style="border-collapse:separate;border-spacing:0;overflow:hidden;">
-    <tr>
-      <td align="center" width="200" valign="middle"
-          style="background:linear-gradient(135deg,#1f2937,#374151);padding:28px 20px;border-radius:16px 0 0 16px;">
-        <img src="docs/assets/author.png" alt="author" width="140" height="140"
-             style="border-radius:50%;border:3px solid #F38020;box-shadow:0 4px 14px rgba(0,0,0,.35);object-fit:cover;" />
-      </td>
-      <td align="left" valign="middle"
-          style="background:#f8fafc;padding:24px 28px;border-radius:0 16px 16px 0;">
-        <div style="font-size:18px;font-weight:700;color:#111827;">
-          一个不识码的中年男人 🧓👨‍💻
-        </div>
-        <div style="font-size:13px;color:#6b7280;margin-top:4px;">
-          正经西装领带，不正经的只有思路。
-        </div>
-        <div style="margin-top:12px;font-size:13.5px;line-height:1.7;color:#374151;">
-          💡 <strong>作者自述</strong>：本职工作跟代码没半点关系，纯属闲着也是闲着，拿 Cloudflare Workers 实现TV直播源自由。<br/>
-          这个直播源聚合服务，就是一边想一边跟AI结对编程"磕"出来的——能跑就算成功，跑崩了就刷新重试。<br/>
-          直播源不是最优，但好在 <strong>能用、好部署、改配置就能跑</strong>，适合同样想折腾又不想深陷 Node 生态的同学。
-        </div>
-        <div style="margin-top:12px;font-size:13px;color:#4b5563;">
-          如果这个项目对你有帮助，欢迎 ⭐ Star / Fork，也欢迎提 Issue（作者承诺尽量看、不一定改 😂）。
-        </div>
-      </td>
-    </tr>
-  </table>
-</p>
 
 ---
 
