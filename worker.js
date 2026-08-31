@@ -344,6 +344,14 @@ function normalizeChannelName(rawTitle) {
     name = name.replace(/\s*null\s*/gi, " ");
     name = name.replace(/\s*\[object\s+[^\]]*?\]\s*/g, "");
 
+    // CCTV 主台号 → 官方名映射（函数级，供下方 5(b+)、5b 各处复用）
+    const CCTV_MAIN = {
+        "1": "综合", "2": "财经", "3": "综艺", "4": "中文国际",
+        "5": "体育", "6": "电影", "7": "国防军事", "8": "电视剧",
+        "9": "纪录", "10": "科教", "11": "戏曲", "12": "社会与法",
+        "13": "新闻", "14": "少儿", "15": "音乐", "16": "奥林匹克", "17": "农业农村",
+    };
+
     // 1) 保留作为频道身份的 4K/8K/UHD，仅清理括号画质 / 尾部规格词 / 孤立"高清"
     name = name.replace(/\s*[（(](?:4K|8K|HD|高清|超清|蓝光|标清|原画)[)）]/gi, "");
     name = name.replace(/\s*(超清|蓝光|标清|原画|2160P|1080[PI]|720[PI]|480[PI]|FHD)\s*$/gi, "");
@@ -362,6 +370,17 @@ function normalizeChannelName(rawTitle) {
     name = name.replace(/\s*[（(][^()）]*?[)）]/g, "");
 
     // 5) CCTV 前缀 / 序号噪声清理（只动结构，不改写名称主体）
+    //   (b+) 把「CCTV<n>-<m>」合成为两位真实台号并直接补全官方名
+    //        （CCTV1-1 → CCTV11-戏曲），仅当合成结果属于 CCTV11~CCTV17 时生效。
+    //        直接补全官方名可避免被下方 5b(1) 的贪婪正则把 "CCTV11" 误拆为 n=1,suffix=1。
+    name = name.replace(/^CCTV\s*(\d)\s*-\s*([1-7])\s*$/i, (_, a, b) => {
+        const two = a + b;  // "11".."17"
+        return CCTV_MAIN[two] ? "CCTV" + two + "-" + CCTV_MAIN[two] : "CCTV" + a + "-" + b;
+    });
+    name = name.replace(/^CCTV\s*(\d)\s*-\s*([1-7])\s*(-\s*)([^\s].*)$/i, (_, a, b, dash, rest) => {
+        const two = a + b;
+        return CCTV_MAIN[two] ? "CCTV" + two + "-" + rest : "CCTV" + a + "-" + b + dash + rest;
+    });
     //   (a) CCTV-1 / CCTV 1 → CCTV1
     name = name.replace(/\bCCTV\s*[-·.\s]?\s*(\d+)\b/gi, "CCTV$1");
     //   (b) CCTV1-1-戏曲 → CCTV1-戏曲（剔除台号后紧跟的单个数字序号段）
@@ -383,12 +402,6 @@ function normalizeChannelName(rawTitle) {
 
     // 5b) CCTV 命名规范：统一为「CCTV<台号>-<官方名>」
     //   主台 CCTV1~CCTV17、同台号后缀（CCTV4-欧洲）、品牌付费（CCTV-世界地理）、CCTV5+ 保留
-    const CCTV_MAIN = {
-        "1": "综合", "2": "财经", "3": "综艺", "4": "中文国际",
-        "5": "体育", "6": "电影", "7": "国防军事", "8": "电视剧",
-        "9": "纪录", "10": "科教", "11": "戏曲", "12": "社会与法",
-        "13": "新闻", "14": "少儿", "15": "音乐", "16": "奥林匹克", "17": "农业农村",
-    };
     // (1) CCTV + 数字 + 后缀 → CCTV<n>-<后缀>
     name = name.replace(/^CCTV\s*(\d+)\s*[-·—－\s]?\s*([^\s\-+＋][^\s]*)$/i, (_, n, suffix) => {
         if (n === "1" && /^0-?科教/.test(suffix)) return "CCTV10-科教";
@@ -1032,8 +1045,16 @@ function buildM3U(channels) {
 
 function buildTXT(channels) {
     const groupMap = sortGroups(sortedGroupMap(channels));
-    const promoGroups = new Set(PROMO_LIST.map(p => p.group || "推流信息"));
     const out = [];
+
+    // ★ 引流节目置顶（与 buildM3U 保持一致）：茂哥TV 分组始终排在最前
+    const promoGroup = "茂哥TV";
+    out.push(`${promoGroup},#genre#`);
+    for (const p of PROMO_LIST) {
+        out.push(`${p.title},${p.url}`);
+    }
+    out.push('');
+
     const hasPlaces = [...groupMap.keys()].some(k => k.startsWith("🎬 地方台-"));
     const mainOrder = MAIN_GROUP_ORDER.filter(g => groupMap.has(g) || (g === "🎬 地方台" && hasPlaces));
     for (const group of mainOrder) {
