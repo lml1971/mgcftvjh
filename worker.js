@@ -2,7 +2,8 @@
 // 已接入 KV 缓存，避免每次冷启动重新抓取
 
 const SOURCE_URLS = [
-    { url: "https://0701.tv1288.xyz/m3u", format: "m3u" }, 
+    { url: "https://0701.tv1288.xyz/m3u", format: "m3u" },
+    { url: "https://raw.githubusercontent.com/akiralereal/iptv/refs/heads/main/IPTV.m3u", format: "m3u" },
     { url: "https://gh-proxy.com/https://raw.githubusercontent.com/taoBox2620/taoBox2620/refs/heads/main/logo1.png" },   
     { url: "https://gh-proxy.com/https://raw.githubusercontent.com/kakaxi-1/IPTV/refs/heads/main/iptv.txt", format: "txt" },
 ];
