@@ -112,16 +112,31 @@ const SPAM_KEYWORDS = ["广告", "加群", "公众号"];
 
 ## 🔧 部署
 
-**方式一 · Wrangler CLI**
+三种方式任选其一。`wrangler.toml` 已配置 KV 自动创建（binding 名 `KV`），一般无需手动建命名空间。
+
+**方式一 · Git 集成（推荐：push 即自动部署）**
+
+1. Dashboard → Workers & Pages → Create → **Workers** → **Connect to Git**
+2. 选择 GitHub 仓库 `lml1971/mgcftvjh`、分支 `main`，构建/部署配置保持默认（入口 `worker.js`）
+3. 保存后，每次向 `main` 推送代码都会自动重新部署；KV 由 `wrangler.toml` 自动 provisioning
+4. （可选）Settings → Variables and Secrets 添加 `SOURCE_URLS` / `ENABLE_PROMO` / `FALLBACK_LOGO_BASE`
+
+**方式二 · Dashboard 手动粘贴**
+
+1. Workers & Pages → Create Worker → 起名 → Deploy
+2. **Edit code** → 粘贴 `worker.js` 全部内容 → Deploy
+3. Settings → Bindings → 添加 **KV Namespace**，变量名填 `KV`
+   （不绑定 KV 也能正常运行，只是每次请求都回源抓取、不缓存）
+
+**方式三 · Wrangler CLI**
 
 ```bash
-npm install -g wrangler && wrangler login
-wrangler deploy          # KV 按 wrangler.toml 自动创建（binding 名须为 KV）
+npm install -g wrangler
+wrangler login
+wrangler deploy          # 首次部署会自动创建 KV 命名空间
 ```
 
-**方式二 · Dashboard**：Workers & Pages → Create Worker → 粘贴 `worker.js` → Settings → Bindings 添加 KV（变量名 `KV`）→ Save & Deploy。
-
-部署后访问 `https://你的worker.workers.dev/txt` 即可拿到直播源，填入 TVBox / IPTV 播放器。
+**验证部署**：访问 `https://你的worker名.workers.dev/txt`，看到以 `茂哥TV,#genre#` 开头、随后是央视/卫视分组的频道列表即成功；把该 URL 填入 TVBox / IPTV 播放器的直播源配置即可（`/m3u` 路径同理）。
 
 ---
 
