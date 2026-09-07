@@ -17,7 +17,7 @@
 const SOURCE_URLS = [
     { url: "https://0701.tv1288.xyz/m3u", format: "m3u" },
     { url: "https://gh-proxy.com/https://raw.githubusercontent.com/kakaxi-1/IPTV/refs/heads/main/iptv.txt", format: "txt" },
-    { url: "https://raw.githubusercontent.com/akiralereal/iptv/refs/heads/main/IPTV.m3u", format: "m3u" },
+    { url: "https://gh-proxy.com/https://raw.githubusercontent.com/akiralereal/iptv/refs/heads/main/IPTV.m3u", format: "m3u" },
 ];
 
 /**
@@ -27,7 +27,7 @@ const SOURCE_URLS = [
 const PROMO_LIST = [
     {
         title: "幸福家",
-        url:   "https://lmlcyp.ccwu.cc/raw/mp4/1.mp4",
+        url:   "https://wj.lmlcyp.ccwu.cc/raw/mp4/1.mp4",
         pic:   "https://ts1.tc.mm.bing.net/th/id/R-C.44a8fce5f82322ff6047579c70ba87a5?rik=GtFY9WEgT3mvmg&riu=http%3a%2f%2f5b0988e595225.cdn.sohucs.com%2fq_70%2cc_zoom%2cw_640%2fimages%2f20170819%2f31955e56cdbc478e8a9d53b54d92cbf0.jpeg&ehk=kYySxDkRdxi37EML22nDcDWX8ypoyqXbPt6ziempjDg%3d&risl=&pid=ImgRaw&r=0",
         group: "茂哥TV",
         from:  "线路A",
@@ -35,7 +35,7 @@ const PROMO_LIST = [
     },
     {
         title: "老李卡通",
-        url:   "https://lmlcyp.ccwu.cc/raw/mp4/2.mp4",
+        url:   "https://wj.lmlcyp.ccwu.cc/raw/mp4/2.mp4",
         pic:   "https://ts1.tc.mm.bing.net/th/id/R-C.44a8fce5f82322ff6047579c70ba87a5?rik=GtFY9WEgT3mvmg&riu=http%3a%2f%2f5b0988e595225.cdn.sohucs.com%2fq_70%2cc_zoom%2cw_640%2fimages%2f20170819%2f31955e56cdbc478e8a9d53b54d92cbf0.jpeg&ehk=kYySxDkRdxi37EML22nDcDWX8ypoyqXbPt6ziempjDg%3d&risl=&pid=ImgRaw&r=0",
         group: "茂哥TV",
         from:  "线路A",
@@ -43,7 +43,7 @@ const PROMO_LIST = [
     },
     {
         title: "我们一家",
-        url:   "https://lmlcyp.ccwu.cc/raw/mp4/3.mp4",
+        url:   "https://wj.lmlcyp.ccwu.cc/raw/mp4/3.mp4",
         pic:   "https://ts1.tc.mm.bing.net/th/id/R-C.44a8fce5f82322ff6047579c70ba87a5?rik=GtFY9WEgT3mvmg&riu=http%3a%2f%2f5b0988e595225.cdn.sohucs.com%2fq_70%2cc_zoom%2cw_640%2fimages%2f20170819%2f31955e56cdbc478e8a9d53b54d92cbf0.jpeg&ehk=kYySxDkRdxi37EML22nDcDWX8ypoyqXbPt6ziempjDg%3d&risl=&pid=ImgRaw&r=0",
         group: "茂哥TV",
         from:  "线路A",
@@ -51,7 +51,7 @@ const PROMO_LIST = [
     },
     {
         title: "25年前",
-        url:   "https://lmlcyp.ccwu.cc/raw/mp4/VDO_0012.mp4",
+        url:   "https://wj.lmlcyp.ccwu.cc/raw/mp4/VDO_0012.mp4",
         pic:   "https://ts1.tc.mm.bing.net/th/id/R-C.44a8fce5f82322ff6047579c70ba87a5?rik=GtFY9WEgT3mvmg&riu=http%3a%2f%2f5b0988e595225.cdn.sohucs.com%2fq_70%2cc_zoom%2cw_640%2fimages%2f20170819%2f31955e56cdbc478e8a9d53b54d92cbf0.jpeg&ehk=kYySxDkRdxi37EML22nDcDWX8ypoyqXbPt6ziempjDg%3d&risl=&pid=ImgRaw&r=0",
         group: "茂哥TV",
         from:  "线路A",
