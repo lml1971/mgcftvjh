@@ -51,11 +51,15 @@
 |------|------|
 | 🔀 多源聚合 | 并发抓取多个远程源（`.m3u` / `.txt`，可自动识别），单源失败不阻塞 |
 | ⚡ KV 缓存 | 绑定 Cloudflare KV 后缓存 10 分钟，未绑定则每次直接抓取（自动降级） |
-| 🗂️ 分组排序 | **沿用上游源自带分组名**，输出时自动按 `推流组 → 央视 → 卫视 → 地方 → 港澳台/国际 → 其他` 排序，同档保持原顺序 |
+| 📝 频道名规范化 | CCTV-1~17 裸号自动补官方副名（CCTV-1→CCTV-1 综合），CGTN/CETV/CHC 统一写法，剥离 HD/4K/(1080p) 等冗余标签 |
+| 🗂️ 分组合并 | 央视/卫视/地方/香港/台湾/澳门 按关键词合并到统一分组名，**不出现「其他频道」**（按名称重新归类到体育/电影/新闻等） |
+| 🔄 URL 去重 | 同一 URL 跨源只保留一条（不管频道名是否相同） |
+| 🔍 死链探测 | 可选开启：并发 HTTP 探测剔除无法访问的 URL（`PROBE_DEAD_LINKS=true`） |
+| ⚡ 择优排序 | 同一频道多源时按响应速度排序，快者在前（与死链探测一同启用） |
 | 📢 推流置顶 | `PROMO_LIST` 节目固定排在最前（可用环境变量一键关闭） |
 | 🧹 垃圾过滤 | `SPAM_KEYWORDS` 黑名单过滤广告 / 加群 / 公告类频道 |
 | 📦 多格式输出 | M3U / TXT / JSON（类苹果 CMS：首页 / 分类 / 详情），全开放 CORS |
-| 🔧 环境变量覆盖 | `SOURCE_URLS` / `ENABLE_PROMO` / `FALLBACK_LOGO_BASE` 可在 Dashboard 动态覆盖 |
+| 🔧 环境变量覆盖 | `SOURCE_URLS` / `ENABLE_PROMO` / `FALLBACK_LOGO_BASE` / `PROBE_DEAD_LINKS` 等可在 Dashboard 动态覆盖 |
 
 ### 路由一览
 
@@ -107,6 +111,10 @@ const SPAM_KEYWORDS = ["广告", "加群", "公众号"];
 | `SOURCE_URLS` | JSON 字符串，覆盖直播源，如 `[{"url":"https://...m3u"}]` |
 | `ENABLE_PROMO` | 设为 `"false"` 关闭推流注入（默认开启） |
 | `FALLBACK_LOGO_BASE` | 自定义台标兜底域名（缺台标的频道按频道名拼台标） |
+| `PROBE_DEAD_LINKS` | 设为 `"true"` 开启死链探测 + 择优排序（默认关闭） |
+| `PROBE_TIMEOUT_MS` | 单 URL 探测超时毫秒（默认 `5000`） |
+| `PROBE_MAX_URLS` | 最多探测 URL 数（默认 `30`，免费 Worker 子请求上限 50） |
+| `PROBE_CONCURRENCY` | 并发探测数（默认 `10`） |
 
 ---
 
