@@ -15,7 +15,7 @@
  *   format? : 可选，"m3u" | "txt"；不填则按内容自动判断
  */
 const SOURCE_URLS = [
-    { url: "https://0701.tv1288.xyz/m3u", format: "m3u" },
+    { url: "https://0701.tv1288.xyz/txt", format: "txt" },
     { url: "https://gh-proxy.com/https://raw.githubusercontent.com/kakaxi-1/IPTV/refs/heads/main/iptv.txt", format: "txt" },
     { url: "https://gh-proxy.com/https://raw.githubusercontent.com/akiralereal/iptv/refs/heads/main/IPTV.m3u", format: "m3u" },
 ];
