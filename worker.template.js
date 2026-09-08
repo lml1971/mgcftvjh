@@ -683,8 +683,12 @@ function buildM3U(channels, promos) {
     for (const g of groupOrder) {
         if (promoGroups.has(g)) continue;
         for (const ch of (groupMap.get(g) || [])) {
-            lines.push(`#EXTINF:-1 tvg-logo="${sanitizeAttr(ch.logo)}" group-title="${sanitizeAttr(ch.group)}",${sanitizeAttr(ch.title)}`);
-            lines.push(ch.urls && ch.urls.length > 1 ? ch.urls.join(',') : ch.url);
+            // ★ 同一频道的多个不同 URL 全部保留，每个 URL 输出一组 #EXTINF + URL
+            const urls = (ch.urls && ch.urls.length > 0) ? ch.urls : [ch.url];
+            for (const u of urls) {
+                lines.push(`#EXTINF:-1 tvg-logo="${sanitizeAttr(ch.logo)}" group-title="${sanitizeAttr(ch.group)}",${sanitizeAttr(ch.title)}`);
+                lines.push(u);
+            }
         }
     }
     return lines.join('\n');
@@ -694,7 +698,14 @@ function buildTXT(channels, promos) {
     const groupMap = new Map();
     const add = (g, title, url) => { if (!groupMap.has(g)) groupMap.set(g, []); groupMap.get(g).push({ title, url }); };
     for (const p of promos) add(p.group || PROMO_DEFAULT_GROUP, p.title, p.url);
-    for (const ch of channels) { const u = ch.urls && ch.urls.length > 0 ? ch.urls[0] : ch.url; add(ch.group, ch.title, u); }
+    // ★ 同一频道的多个不同 URL 全部保留，每个 URL 输出一行
+    for (const ch of channels) {
+        if (ch.urls && ch.urls.length > 0) {
+            for (const u of ch.urls) add(ch.group, ch.title, u);
+        } else {
+            add(ch.group, ch.title, ch.url);
+        }
+    }
     const promoGroups = new Set(promos.map(p => p.group || PROMO_DEFAULT_GROUP));
     const groupOrder = [...Array.from(promoGroups), ...orderedGroupNames(Array.from(groupMap.keys()), promoGroups)];
     const out = [];
