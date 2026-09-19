@@ -12,6 +12,7 @@
 
 const SOURCE_URLS = [
     { url: "https://0701.tv1288.xyz/txt", format: "txt" },
+    { url: "https://gh-proxy.com/https://raw.githubusercontent.com/vbskycn/iptv/refs/heads/master/tv/iptv4.txt", format: "txt" },
     { url: "https://gh-proxy.com/https://raw.githubusercontent.com/lml1971/tv/refs/heads/main/tv1.txt", format: "txt" },    
     { url: "https://gh-proxy.com/https://raw.githubusercontent.com/best-fan/iptv-sources/refs/heads/main/cn_all_status.m3u8" },
     { url: "https://gh-proxy.com/https://raw.githubusercontent.com/kakaxi-1/IPTV/refs/heads/main/iptv.txt", format: "txt" },
