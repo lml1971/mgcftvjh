@@ -13,11 +13,7 @@
 const SOURCE_URLS = [
     { url: "https://live.hacks.tools/tv/ipv4/categories/央视频道.m3u", format: "m3u" },
     { url: "https://live.hacks.tools/tv/ipv4/categories/卫视频道.m3u", format: "m3u" },
-    { url: "https://gh-proxy.com/https://raw.githubusercontent.com/vbskycn/iptv/refs/heads/master/tv/iptv4.txt", format: "txt" },
-    { url: "https://gh-proxy.com/https://raw.githubusercontent.com/lml1971/tv/refs/heads/main/tv1.txt", format: "txt" },    
-    { url: "https://gh-proxy.com/https://raw.githubusercontent.com/best-fan/iptv-sources/refs/heads/main/cn_all_status.m3u8" },
-    { url: "https://gh-proxy.com/https://raw.githubusercontent.com/kakaxi-1/IPTV/refs/heads/main/iptv.txt", format: "txt" },
-    { url: "https://gh-proxy.com/https://raw.githubusercontent.com/akiralereal/iptv/refs/heads/main/IPTV.m3u", format: "m3u" },
+    { url: "https://gh-proxy.com/https://raw.githubusercontent.com/lml1971/tv/refs/heads/main/tv1.txt", format: "txt" },
 ];
 
 const PROMO_LIST = [
