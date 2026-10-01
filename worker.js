@@ -13,7 +13,7 @@
 const SOURCE_URLS = [
     { url: "https://live.hacks.tools/tv/ipv4/categories/央视频道.m3u", format: "m3u" },
     { url: "https://live.hacks.tools/tv/ipv4/categories/卫视频道.m3u", format: "m3u" },
-     { url: "https://raw.githubusercontent.com/best-fan/iptv-sources/refs/heads/main/cn_all.m3u8", format: "m3u" },
+    { url: "https://raw.githubusercontent.com/best-fan/iptv-sources/refs/heads/main/cn_all.m3u8", format: "m3u" },
     { url: "https://gh-proxy.com/https://raw.githubusercontent.com/lml1971/tv/refs/heads/main/tv1.txt", format: "txt" },
 ];
 
