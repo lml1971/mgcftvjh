@@ -11,6 +11,7 @@
 /* ===== 用户配置区（按需修改）========================================== */
 
 const SOURCE_URLS = [
+    { url: "https://ysp.lml1971.ccwu.cc/txt", format: "txt" },
     { url: "https://gh-proxy.com/https://raw.githubusercontent.com/lml1971/tv/refs/heads/main/tv1.txt", format: "txt" },
     { url: "https://live.hacks.tools/tv/ipv4/categories/央视频道.m3u", format: "m3u" },
     { url: "https://live.hacks.tools/tv/ipv4/categories/卫视频道.m3u", format: "m3u" },
