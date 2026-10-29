@@ -13,8 +13,6 @@
 const SOURCE_URLS = [
     { url: "https://ysp.lml1971.ccwu.cc/txt", format: "txt" },
     { url: "https://gh-proxy.com/https://raw.githubusercontent.com/lml1971/tv/refs/heads/main/tv1.txt", format: "txt" },
-    { url: "https://raw.githubusercontent.com/taoBox2620/taoBox2620/refs/heads/main/logo1.png", format: "txt" },
-    { url: "https://raw.githubusercontent.com/cs3306/IPTV-Sources/main/data/output/iptv_collection.m3u", format: "m3u" },
     { url: "https://raw.githubusercontent.com/best-fan/iptv-sources/refs/heads/main/cn_all.m3u8", format: "m3u" },
 ];
 
