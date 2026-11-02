@@ -131,7 +131,6 @@ const _TAIL_SEP_RE = /[\s\-_－]+$/;
 const _HEAD_SEP_RE = /^[\s\-_－]+/;
 const _CCTV_NUM_RE = /^CCTV\s*[-_\s]?\s*(\d{1,2})/i;
 const _CHC_RE      = /^CHC\s*[-－_]?\s*(.*)$/i;
-const _CENTRAL_RE  = /^(CCTV|央视|CGTN|CETV|CHC|中国教育)/i;
 
 const _CCTV_MAIN_SUB = {
     1:"综合", 2:"财经", 3:"综艺", 4:"中文国际", 5:"体育",
@@ -271,73 +270,6 @@ function canonicalName(name) {
     if (ch !== n || /^CHC/i.test(n)) return ch;
 
     return stripClarity(n) || n;
-}
-
-/* ===== 频道分类与分组合并 ============================================= */
-
-function isCentralChannel(name) {
-    return _CENTRAL_RE.test(name || "");
-}
-
-const _GROUP_MERGE_RULES = [
-    ["港澳台","香港频道"],["港台","香港频道"],
-    ["央视","央视频道"],["卫视","卫视频道"],["地方","地方频道"],
-    ["香港","香港频道"],["台湾","台湾频道"],["澳门","澳门频道"],
-];
-
-function mergeGroupName(group) {
-    const g = (group || "").trim();
-    if (!g || g === "茂哥TV" || g === "其他" || g === "其他频道" || g === "未分组") return g;
-    for (const [kw, target] of _GROUP_MERGE_RULES) {
-        if (g.includes(kw)) return target;
-    }
-    return g;
-}
-
-const _HK_KEYWORDS = ["TVB","翡翠台","J2","Pearl","明珠台","VIU TV","Now TV","香港卫视","HKC","RHK","凤凰香港","凤凰中文","凤凰资讯","凤凰","HKS","香港"];
-const _TW_KEYWORDS = ["台视","中视","华视","民视","公共电视","PTS","三立","TVBS","东森","中天","年代","八大","霹雳","客家电视","原住民电视台","台湾"];
-const _RECLASSIFY_RULES = [
-    [["卫视"],"卫视频道"],
-    [["北京","上海","广东","湖南","浙江","江苏","深圳","四川","湖北","辽宁","山东","河南","河北","福建","安徽","江西","黑龙江","吉林","云南","贵州","重庆","陕西","甘肃","广西","新疆","内蒙古","西藏","宁夏","青海","海南","天津","山西","地方","省台","市台","都市"],"地方频道"],
-    [["体育","NBA","足球","篮球","网球","高尔夫","搏击","赛车"],"体育频道"],
-    [["电影","影视","CINEMA","MOVIE"],"电影频道"],
-    [["新闻","资讯"],"新闻频道"],
-    [["少儿","卡通","动漫","动画","亲子","BABY","儿童"],"少儿频道"],
-    [["纪录","DOC"],"纪实频道"],
-    [["财经"],"财经频道"],
-    [["音乐","MUSIC"],"音乐频道"],
-    [["戏曲","京剧"],"戏曲频道"],
-    [["教育"],"教育频道"],
-    [["法治","社会"],"社会与法频道"],
-    [["旅游","美食","生活","健康"],"生活频道"],
-];
-
-function _nameHas(name, keywords) {
-    const low = (name || "").toLowerCase();
-    return keywords.some(kw => low.includes(kw.toLowerCase()));
-}
-
-function classifyChannel(name, currentGroup) {
-    const nm = name || "";
-    if (isCentralChannel(nm)) return "央视频道";
-
-    const lowNm = nm.toLowerCase();
-    const lowNoTvbs = lowNm.replace("tvbs", "");
-    const hasTw = _TW_KEYWORDS.some(kw => lowNm.includes(kw.toLowerCase()));
-    const hasHk = _HK_KEYWORDS.some(kw => lowNoTvbs.includes(kw.toLowerCase()));
-
-    if (hasTw && !hasHk) return "台湾频道";
-    if (hasHk && !hasTw) return "香港频道";
-    if (hasHk && hasTw) return nm.includes("台湾") ? "台湾频道" : "香港频道";
-    if (_nameHas(nm, ["澳门"])) return "澳门频道";
-
-    const g = (currentGroup || "").trim();
-    if (g === "其他频道" || g === "其他" || g === "未分组") {
-        for (const [keywords, target] of _RECLASSIFY_RULES) {
-            if (_nameHas(nm, keywords)) return target;
-        }
-    }
-    return null;
 }
 
 /* ===== 分组排序与组内排序 ============================================= */
