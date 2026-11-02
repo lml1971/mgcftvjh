@@ -535,8 +535,7 @@ async function loadAll(env, ctx) {
     for (const r of results) {
         for (const ch of r.channels) {
             const canonTitle = canonicalName(ch.title);
-            const classified = classifyChannel(canonTitle, ch.group);
-            const group = classified !== null ? classified : mergeGroupName(ch.group);
+            const group = ch.group || "默认频道";
             const key = `${group}|${canonTitle}`;
 
             const urls = (ch.urls && ch.urls.length > 0) ? ch.urls : [ch.url];
